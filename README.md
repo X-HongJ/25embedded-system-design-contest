@@ -1,6 +1,6 @@
 # 作品实物图
 
-![](E:\CAD431\研电赛&嵌赛\25embedded-system-design-contest\img\开发板2.jpg)
+![](img/开发板2.jpg)
 
 # 作品简介
 
