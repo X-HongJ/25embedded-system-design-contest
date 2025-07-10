@@ -32,7 +32,7 @@
 
 
 
-![](E:\CAD431\研电赛&嵌赛\25embedded-system-design-contest\img\图片1.png)
+![](img/图片1.png)
 
 
 
