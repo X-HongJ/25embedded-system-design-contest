@@ -1,0 +1,6 @@
+train: E:\PostGraduatedProjext\Other\cprpc\code\ultralytics\data\imageSets\fireandsmoke\images\train
+val: E:\PostGraduatedProjext\Other\cprpc\code\ultralytics\data\imageSets\fireandsmoke\images\val
+test: E:\PostGraduatedProjext\Other\cprpc\code\ultralytics\data\imageSets\fireandsmoke\images\test
+nc: 2
+
+names: ['fire', 'smoke']  # class names
