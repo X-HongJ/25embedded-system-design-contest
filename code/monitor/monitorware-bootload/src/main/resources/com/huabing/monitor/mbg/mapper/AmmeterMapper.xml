@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huabing.monitor.mbg.mapper.AmmeterMapper">
+  <resultMap id="BaseResultMap" type="com.huabing.monitor.mbg.model.Ammeter">
+    <id column="ammeter_id" jdbcType="INTEGER" property="ammeterId" />
+    <result column="ammeter_app_code" jdbcType="VARCHAR" property="ammeterAppCode" />
+    <result column="ammeter_distination" jdbcType="VARCHAR" property="ammeterDistination" />
+    <result column="ammeter_info" jdbcType="VARCHAR" property="ammeterInfo" />
+    <result column="file_id" jdbcType="INTEGER" property="fileId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ammeter_id, ammeter_app_code, ammeter_distination, ammeter_info, file_id
+  </sql>
+  <select id="selectByExample" parameterType="com.huabing.monitor.mbg.model.AmmeterExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ammeter
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ammeter
+    where ammeter_id = #{ammeterId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ammeter
+    where ammeter_id = #{ammeterId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huabing.monitor.mbg.model.AmmeterExample">
+    delete from ammeter
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huabing.monitor.mbg.model.Ammeter">
+    <selectKey keyProperty="ammeterId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ammeter (ammeter_app_code, ammeter_distination, 
+      ammeter_info, file_id)
+    values (#{ammeterAppCode,jdbcType=VARCHAR}, #{ammeterDistination,jdbcType=VARCHAR}, 
+      #{ammeterInfo,jdbcType=VARCHAR}, #{fileId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huabing.monitor.mbg.model.Ammeter">
+    <selectKey keyProperty="ammeterId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ammeter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ammeterAppCode != null">
+        ammeter_app_code,
+      </if>
+      <if test="ammeterDistination != null">
+        ammeter_distination,
+      </if>
+      <if test="ammeterInfo != null">
+        ammeter_info,
+      </if>
+      <if test="fileId != null">
+        file_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ammeterAppCode != null">
+        #{ammeterAppCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ammeterDistination != null">
+        #{ammeterDistination,jdbcType=VARCHAR},
+      </if>
+      <if test="ammeterInfo != null">
+        #{ammeterInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huabing.monitor.mbg.model.AmmeterExample" resultType="java.lang.Long">
+    select count(*) from ammeter
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ammeter
+    <set>
+      <if test="record.ammeterId != null">
+        ammeter_id = #{record.ammeterId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ammeterAppCode != null">
+        ammeter_app_code = #{record.ammeterAppCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ammeterDistination != null">
+        ammeter_distination = #{record.ammeterDistination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ammeterInfo != null">
+        ammeter_info = #{record.ammeterInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileId != null">
+        file_id = #{record.fileId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ammeter
+    set ammeter_id = #{record.ammeterId,jdbcType=INTEGER},
+      ammeter_app_code = #{record.ammeterAppCode,jdbcType=VARCHAR},
+      ammeter_distination = #{record.ammeterDistination,jdbcType=VARCHAR},
+      ammeter_info = #{record.ammeterInfo,jdbcType=VARCHAR},
+      file_id = #{record.fileId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huabing.monitor.mbg.model.Ammeter">
+    update ammeter
+    <set>
+      <if test="ammeterAppCode != null">
+        ammeter_app_code = #{ammeterAppCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ammeterDistination != null">
+        ammeter_distination = #{ammeterDistination,jdbcType=VARCHAR},
+      </if>
+      <if test="ammeterInfo != null">
+        ammeter_info = #{ammeterInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null">
+        file_id = #{fileId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ammeter_id = #{ammeterId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huabing.monitor.mbg.model.Ammeter">
+    update ammeter
+    set ammeter_app_code = #{ammeterAppCode,jdbcType=VARCHAR},
+      ammeter_distination = #{ammeterDistination,jdbcType=VARCHAR},
+      ammeter_info = #{ammeterInfo,jdbcType=VARCHAR},
+      file_id = #{fileId,jdbcType=INTEGER}
+    where ammeter_id = #{ammeterId,jdbcType=INTEGER}
+  </update>
+</mapper>

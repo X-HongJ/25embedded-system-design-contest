@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huabing.monitor.mbg.mapper.BinfileMapper">
+  <resultMap id="BaseResultMap" type="com.huabing.monitor.mbg.model.Binfile">
+    <id column="file_id" jdbcType="INTEGER" property="fileId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="changedate" jdbcType="TIMESTAMP" property="changedate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    file_id, name, path, changedate
+  </sql>
+  <select id="selectByExample" parameterType="com.huabing.monitor.mbg.model.BinfileExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from binfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from binfile
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from binfile
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huabing.monitor.mbg.model.BinfileExample">
+    delete from binfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huabing.monitor.mbg.model.Binfile">
+    insert into binfile (file_id, name, path, 
+      changedate)
+    values (#{fileId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{changedate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huabing.monitor.mbg.model.Binfile">
+    insert into binfile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="changedate != null">
+        changedate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="changedate != null">
+        #{changedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huabing.monitor.mbg.model.BinfileExample" resultType="java.lang.Long">
+    select count(*) from binfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update binfile
+    <set>
+      <if test="record.fileId != null">
+        file_id = #{record.fileId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null">
+        path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changedate != null">
+        changedate = #{record.changedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update binfile
+    set file_id = #{record.fileId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      path = #{record.path,jdbcType=VARCHAR},
+      changedate = #{record.changedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huabing.monitor.mbg.model.Binfile">
+    update binfile
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="changedate != null">
+        changedate = #{changedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huabing.monitor.mbg.model.Binfile">
+    update binfile
+    set name = #{name,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      changedate = #{changedate,jdbcType=TIMESTAMP}
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+</mapper>

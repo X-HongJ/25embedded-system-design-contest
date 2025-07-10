@@ -1,0 +1,28 @@
+-------------------------------  AD.pjt - Debug  -------------------------------
+[AD.c] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -g -pdsw225 -fr"D:/MyProjects/example/YX28335PRO-V100/lab25-AD/Debug" -i"../include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28 --float_support=fpu32 -@"../Debug.lkf" "AD.c"
+
+[DSP2833x_Adc.c] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -g -pdsw225 -fr"D:/MyProjects/example/YX28335PRO-V100/lab25-AD/Debug" -i"../include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28 --float_support=fpu32 -@"../Debug.lkf" "DSP2833x_Adc.c"
+
+[DSP2833x_ADC_cal.asm] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -g -pdsw225 -fr"D:/MyProjects/example/YX28335PRO-V100/lab25-AD/Debug" -i"../include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28 --float_support=fpu32 -@"../Debug.lkf" "DSP2833x_ADC_cal.asm"
+
+[DSP2833x_CodeStartBranch.asm] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -g -pdsw225 -fr"D:/MyProjects/example/YX28335PRO-V100/lab25-AD/Debug" -i"../include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28 --float_support=fpu32 -@"../Debug.lkf" "DSP2833x_CodeStartBranch.asm"
+
+[DSP2833x_CpuTimers.c] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -g -pdsw225 -fr"D:/MyProjects/example/YX28335PRO-V100/lab25-AD/Debug" -i"../include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28 --float_support=fpu32 -@"../Debug.lkf" "DSP2833x_CpuTimers.c"
+
+[DSP2833x_DefaultIsr.c] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -g -pdsw225 -fr"D:/MyProjects/example/YX28335PRO-V100/lab25-AD/Debug" -i"../include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28 --float_support=fpu32 -@"../Debug.lkf" "DSP2833x_DefaultIsr.c"
+
+[DSP2833x_GlobalVariableDefs.c] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -g -pdsw225 -fr"D:/MyProjects/example/YX28335PRO-V100/lab25-AD/Debug" -i"../include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28 --float_support=fpu32 -@"../Debug.lkf" "DSP2833x_GlobalVariableDefs.c"
+
+[DSP2833x_PieCtrl.c] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -g -pdsw225 -fr"D:/MyProjects/example/YX28335PRO-V100/lab25-AD/Debug" -i"../include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28 --float_support=fpu32 -@"../Debug.lkf" "DSP2833x_PieCtrl.c"
+
+[DSP2833x_PieVect.c] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -g -pdsw225 -fr"D:/MyProjects/example/YX28335PRO-V100/lab25-AD/Debug" -i"../include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28 --float_support=fpu32 -@"../Debug.lkf" "DSP2833x_PieVect.c"
+
+[DSP2833x_SysCtrl.c] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -g -pdsw225 -fr"D:/MyProjects/example/YX28335PRO-V100/lab25-AD/Debug" -i"../include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28 --float_support=fpu32 -@"../Debug.lkf" "DSP2833x_SysCtrl.c"
+
+[DSP2833x_usDelay.asm] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -g -pdsw225 -fr"D:/MyProjects/example/YX28335PRO-V100/lab25-AD/Debug" -i"../include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28 --float_support=fpu32 -@"../Debug.lkf" "DSP2833x_usDelay.asm"
+
+[Linking...] "D:\CCStudio_v3.3\C2000\cgtools\bin\cl2000" -@"Debug.lkf"
+<Linking>
+
+Build Complete,
+  0 Errors, 0 Warnings, 0 Remarks.

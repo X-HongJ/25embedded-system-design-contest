@@ -1,0 +1,112 @@
+# 需要配置的为
+
+spring:
+  profiles:
+      active: dev
+  main:
+    web-application-type: none
+
+rabbitmq:
+  default:
+    ttl:
+      delayTime: 20000   # 1000为1s
+
+
+# spring中线程配置
+async:
+  executor:
+    mq: # mq线程池配置
+      thread:
+        core_pool_size: 1
+        max_pool_size: 1
+        queue_capacity: 1
+        keep_alive_time: 0
+        name:
+          prefix: mq-async-server-
+    file: # bootload下发文件线程池配置
+      thread:
+        core_pool_size: 1
+        max_pool_size: 1
+        queue_capacity: 1
+        keep_alive_time: 0
+        name:
+          prefix: file-async-server-
+    order: # 反控下发命令线程池配置
+      thread:
+        core_pool_size: 1
+        max_pool_size: 1
+        queue_capacity: 1
+        keep_alive_time: 0
+        name:
+          prefix: order-async-server-
+
+---
+spring:
+  profiles: dev
+  datasource:
+    username: root
+    password: '19980416*'
+    url: jdbc:mysql://localhost:3306/e_monitor_2020?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+    driverClassName: com.mysql.jdbc.Driver
+  rabbitmq:
+      virtual-host: /monitor  # rabbitmq的虚拟host
+      host: 192.168.0.103     # rabbitmq的连接地址
+      port: 5672      # rabbitmq的连接端口号
+      username: monitor
+      password: monitor
+      publisher-confirms: true  # 如果对异步消息需要回调必须设置为true
+
+monitor:
+  server:
+    name: bootloader-master
+    role: bootloader
+  ip: 192.168.0.189
+
+
+bootloader:
+  default-bin-file: C:\Users\elec.bin
+  timeout: 60 # bootloader任务超时时间，单位s
+# netty配置
+netty:
+  server:
+    host: 0.0.0.0
+    port: 10008  # netty服务端口号
+    heart:
+      readTimeout: 300000   # 读超时
+      writeTimeout: 0   # 写超时，未做配置
+  server2:
+    host: 127.0.0.1
+    port: 8084  # netty服务端口号
+
+# zookeeper 配置
+zookeeper:
+  server:
+    host: 127.0.0.1
+    port: 2181
+  client:
+    path: /monitor/client/${monitor.server.role} # zookeeper注册地址
+    session:
+      timeout: 20000 # zookeeper session的超时时间
+    order:
+      path: /monitor/order/${monitor.server.name} # 指令监控地址
+    bootload:
+      path: /monitor/bootload/${monitor.server.name} # bootload指令监控地址
+      filePath: /monitor/bootloadFilePath/${monitor.server.name} # bootload指令监控地址
+
+curator:
+  retryCount: 3
+  elapsedTimeMs: 5000
+  connectString: 127.0.0.1:2181
+  sessionTimeoutMs: 60000
+  connectionTimeoutMs: 10000
+  bootloader_task: /monitor/bootloader/task   # bootloader任务路径
+  node_name: /monitor/${monitor.server.role}/${monitor.server.name}   # 本节点名称
+  resource: ${monitor.ip}:${netty.server.port}
+
+
+# 日志级别 debug
+logging:
+  level:
+    root: info
+  path: /var/monitor/log/monitormiddleware/${monitor.server.name}/${monitor.server.role}
+

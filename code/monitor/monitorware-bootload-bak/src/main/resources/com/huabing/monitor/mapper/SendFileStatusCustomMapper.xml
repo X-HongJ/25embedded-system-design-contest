@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huabing.monitor.mapper.SendFileStatusCustomMapper">
+    <update id="updateByStationIdBoardId" parameterType="com.huabing.monitor.mbg.model.Sendstatus">
+    update sendstatus set status=#{status,jdbcType=BIT}, reply_time = #{replyTime,jdbcType=TIMESTAMP}
+    where ammeter_app_code = #{ammeterAppCode,jdbcType=VARCHAR}
+     and ammeter_distination = #{ammeterDistination,jdbcType=VARCHAR}
+    order by id desc limit 1;
+  </update>
+
+</mapper>

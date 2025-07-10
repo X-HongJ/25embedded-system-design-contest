@@ -1,0 +1,105 @@
+//package com.huabing.monitor.com.huabing.monitor.manager;
+//
+//import com.huabing.monitor.zookeeper.ServiceRegister;
+//import com.huabing.monitor.zookeeper.Watch;
+//import org.apache.zookeeper.KeeperException;
+//import org.apache.zookeeper.data.Stat;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+//import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.stereotype.Component;
+//
+//import java.util.Arrays;
+//
+///**
+// * @author ping
+// * @classname ZookeeperManage
+// * @description zookeeper启动器
+// * @date 2019/11/22 11:58
+// */
+////@Component
+//public class ZookeeperManager {
+//
+//    private final static Logger LOGGER = LoggerFactory.getLogger(ZookeeperManager.class);
+//
+//
+//    private final ServiceRegister serviceRegister;
+//    private final Watch watchBootload;
+//
+//    @Value("${zookeeper.server.host}")
+//    private String host;
+//    @Value("${zookeeper.server.port}")
+//    private String port;
+//    @Value("${zookeeper.client.session.timeout}")
+//    private String timeout;
+//    @Value("${netty.server.host}")
+//    private String nettyHost;
+//    @Value("${netty.server.port}")
+//    private String nettyPort;
+//    @Value("${zookeeper.client.path}")
+//    private String clientRegisterPath;
+//    @Value("${zookeeper.client.bootload.filePath}")
+//    private String bootloadFilePath;
+//
+//    private String clientPath;
+//
+//    public ZookeeperManager(ServiceRegister serviceRegister,  @Qualifier("watchBootloadImpl") Watch watchBootload) {
+//        this.serviceRegister = serviceRegister;
+//        this.watchBootload = watchBootload;
+//        LOGGER.info("watchBootload={}", watchBootload);
+//    }
+//
+//
+//    public void registerSelf() throws Exception {
+//        Stat stat = serviceRegister.existNode(getClientPath());
+//        if (stat != null) {
+//            serviceRegister.setData(getClientPath(), "0");
+//        } else {
+//            serviceRegister.createNode(getClientPath(), "0", false);
+//        }
+//    }
+//
+//    public void reflushMecheineNum(String data) throws Exception {
+//        Stat stat = serviceRegister.existNode(getClientPath());
+//        if (stat != null) {
+//            serviceRegister.setData(getClientPath(), data);
+//        } else {
+//            serviceRegister.createNode(getClientPath(), data, false);
+//        }
+//    }
+//
+//    private String getClientPath() {
+//        if (clientPath == null) {
+//            this.clientPath = clientRegisterPath + "/" + nettyHost + ":" + nettyPort;
+//        }
+//        return this.clientPath;
+//    }
+//
+//    public void startZk() {
+//        try {
+//            LOGGER.info("zookeeper服务地址为：{}:{}， timeout = {}", host, port, timeout);
+//            String registryAddress = host.concat(":").concat(String.valueOf(port));
+//            serviceRegister.connect(registryAddress, Integer.parseInt(timeout));
+//            LOGGER.info("clientRegisterPath={}, bootloadFilePath={}",
+//                    clientRegisterPath, bootloadFilePath);
+//            serviceRegister.registerPath(Arrays.asList(clientRegisterPath, bootloadFilePath));
+//            registerSelf();
+//            serviceRegister.watchNode(bootloadFilePath, watchBootload);
+//        } catch (Exception e) {
+//            LOGGER.error("startZk error: ", e);
+//        }
+//    }
+//
+//    public void stopZk() {
+//        try {
+//            serviceRegister.deleteNode(bootloadFilePath);
+//            serviceRegister.closeConnection();
+//        } catch (InterruptedException e) {
+//            LOGGER.error("stopZk error: ", e);
+//        } catch (KeeperException e) {
+//            LOGGER.error("stopZk error: ", e);
+//        }
+//    }
+//
+//}
